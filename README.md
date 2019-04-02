@@ -14,7 +14,7 @@ Install the package from pip test repo
 
 and import it with
 
-`from phg-cpselect.cpselect import cpselect`
+`from phg_cpselect.cpselect import cpselect`
 
 ## Using phg-cpselect
 Just call function `cpselect`. The function takes two inputs, two strings with the path to your pictures.
