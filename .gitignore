@@ -83,7 +83,7 @@ celerybeat-schedule
 *.sage.py
 
 # pycharm
-.idea
+.idea/
 
 # Environments
 .env
