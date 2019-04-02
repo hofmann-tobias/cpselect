@@ -386,4 +386,5 @@ if __name__ == '__main__':
     img_path1 = "DSC_0004.JPG"
     img_path2 = "Vorlage_Passpunkte2.png"
 
-    cpselect(img_path1, img_path2)
+    cpl = cpselect(img_path1, img_path2)
+    print(cpl)
