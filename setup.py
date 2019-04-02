@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="phg-cpselect-adal02",
-    version="0.0.2",
-    author="adal02r",
+    version="0.0.4",
+    author="adal02",
     author_email="adal02.py@gmail.com",
     description="Does what cpselect does in MATLAB.",
     long_description=long_description,
@@ -18,4 +18,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    install_requires=['matplotlib', 'Pillow'],
+    include_package_data=True,
+    package_data={
+        'phg_cpselect': ['help.html', 'img/*'],
+    }
 )

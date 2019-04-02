@@ -4,15 +4,17 @@ Does what cpselect does in MATLAB.
 ## Prerequisites
 You will need to have the following packages installed:
 * matplotlib
+* Pillow
 
 ## Installing and import
-Download phg-cpselect package and import it with
 
-`import phg-cpselect` 
+Install the package from pip test repo
 
-or 
+`pip install -i https://test.pypi.org/simple/ phg-cpselect-adal02`  
 
-`from phg-cpselect import cpselect`
+and import it with
+
+`from phg-cpselect.cpselect import cpselect`
 
 ## Using phg-cpselect
 Just call function `cpselect`. The function takes two inputs, two strings with the path to your pictures.
