@@ -19,12 +19,21 @@ Just call function `cpselect`. The function takes two inputs, two strings with t
 
 `controlpointlist = cpselect("path/to/image1", "path/to/image2")`
 
-It will return a list object, with a tuple per control point.
+It will return a list object, which contains a dictionary for each control point.
 
-`[`  
-`(1, 1078.7366076606556, 1166.260376681119, 120.61927314904301, 1090.4764988539393),`  
-`(2, 1672.6776752920384, 1390.1304714037171, 1378.2481704454449, 1085.9198724144596),`  
-`(3, 1672.6776752920384, 732.2265195658779, 1385.0831101046642, 103.96687470658117),`  
-`(4, 1042.186388114109, 599.7319737096464, 116.0626467095633, 103.96687470658117)`  
-]`
-`
+    [
+        {
+        'idp': 1,
+        'img1x': 1060.4614978873824,
+        'img1y': 1152.554044351164,
+        'img2x': 136.567465687222,
+        'img2y': 1095.033125293419,
+        }
+        {
+        'idp': 2,
+        'img1x': 1681.815230178675,
+        'img1y': 727.6577421225597,
+        'img2x': 1378.2481704454449,
+        'img2y': 101.68856148684131,
+        }
+    ]

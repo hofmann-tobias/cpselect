@@ -354,6 +354,19 @@ class _ControlPoint:
     def __str__(self):
         return f"CP {self.idp}: {self.coord}"
 
+    @property
+    def getdict(self):
+
+        dict = {
+            'idp': self.idp,
+            'img1x': self.img1x,
+            'img1y': self.img1y,
+            'img2x': self.img2x,
+            'img2y': self.img2y,
+        }
+
+        return dict
+
 
 def cpselect(img_path1, img_path2):
     """
@@ -374,17 +387,22 @@ def cpselect(img_path1, img_path2):
     cps.raise_()
     app.exec_()
 
-    l = []
+    dictlist = []
     for cp in cps.wp.canvas.CPlist:
-        l.append(cp.coord)
+        dictlist.append(cp.getdict)
 
     del img1, img2
 
-    return l
+    return dictlist
+
 
 if __name__ == '__main__':
     img_path1 = "DSC_0004.JPG"
     img_path2 = "Vorlage_Passpunkte2.png"
 
     cpl = cpselect(img_path1, img_path2)
-    print(cpl)
+
+    for cp in cpl:
+        print(cp)
+
+
