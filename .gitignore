@@ -1,3 +1,8 @@
+# additional
+DSC_0004.JPG
+Vorlage_Passpunkte2.png
+*.bat
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -7,6 +12,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+
 .Python
 build/
 develop-eggs/
@@ -80,6 +86,9 @@ celerybeat-schedule
 
 # SageMath parsed files
 *.sage.py
+
+# pycharm
+.idea/
 
 # Environments
 .env
