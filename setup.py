@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="phg-cpselect-adal02",
-    version="0.0.1",
+    version="0.0.2",
     author="adal02r",
     author_email="adal02.py@gmail.com",
     description="Does what cpselect does in MATLAB.",
