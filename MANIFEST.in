@@ -1,0 +1,3 @@
+include cpselect/img/*
+include cpselect/test/*.JPG
+include cpselect/test/*.png

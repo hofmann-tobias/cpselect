@@ -1,4 +1,4 @@
-import sys
+import sys, os
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -9,9 +9,39 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 from matplotlib.figure import Figure
 
 
+def cpselect(img_path1, img_path2):
+    """
+    Tool for selection a individual number of control points in any two pictures
+
+    :param img_path1: path to the first image
+    :param img_path2: path to the second image
+
+    :return: list with one tuple per control point (ID, x image 1, y image 1, x image 2, y image 2)
+    """
+    global img1
+    global img2
+    img1 = plt.imread(img_path1)
+    img2 = plt.imread(img_path2)
+
+    app = QApplication(sys.argv)
+    cps = _MainWindow()
+    cps.raise_()
+    app.exec_()
+
+    dictlist = []
+    for cp in cps.wp.canvas.CPlist:
+        dictlist.append(cp.getdict)
+
+    del img1, img2
+
+    return dictlist
+
+
 class _MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        # os.path.join(__file__, relative)
 
         self.createWindow()
         self.createConn()
@@ -27,7 +57,7 @@ class _MainWindow(QMainWindow):
 
     def createWindow(self):
         self.setWindowTitle('Control Point Selection Tool')
-        self.setWindowIcon(QIcon('img/cpselect32.ico'))
+        self.setWindowIcon(QIcon(os.path.join(os.path.dirname(__file__), 'img/cpselect32.ico')))
 
         widget = QWidget(self)
 
@@ -49,16 +79,15 @@ class _MainWindow(QMainWindow):
         self.help.setReadOnly(True)
         self.help.setMaximumWidth(400)
         self.help.setMinimumHeight(540)
-        f = QFile("help.html")
-        f.open(QFile.ReadOnly | QFile.Text)
 
-        if not f.isOpen():
-            self.help.insertHtml('<p>Unable to load description</p>')
-        else:
-            fstream = QTextStream(f)
-            self.help.setHtml(fstream.readAll())
-            f.close()
-
+        help_header = '<!DOCTYPE html><html lang="de" id="main"><head><meta charset="UTF-8"><title>Description of cpselect for Python</title><style>td,th{font-size:14px;}p{font-size: 14px;}</style></head>'
+        help_body = '<body><h1>Description of cpselect for Python&emsp;</h1><h2>Navigation Toolbar</h2><img src="{}" alt="navbuttons"><br/><table cellspacing="20px"><tr><th valign="middle" height="20px">Tool</th><th valign="middle" height="20px">how to use</th></tr><tr><td><img src="{}" alt="homebutton"></td><td valign="middle">For all Images, reset to the original view.</td></tr><tr><td><img src="{}" alt="backwardforwardbutton"></td><td valign="middle">Go back to the last or forward to the next view.</td></tr><tr><td><img src="{}" alt="panzoombutton"></td><td valign="middle">Activate the pan/zoom tool. Pan with left mouse button, zoom with right</td></tr><tr><td><img src="{}" alt="backwardforwardbutton"></td><td valign="middle">Zoom with drawing a rectangle</td></tr></table><h2>Pick Mode</h2><p>Change into pick mode to pick up your control points. You have to pick the control points in both images before you can start to pick the next point.</p><p>Press the red button below to start pick mode.</p><h2>Control Point list</h2><p>Below in the table, all your control points are listed. You can delete one ore more selected control points with the <b>delete</b> button.</p><h2>Return</h2><p>If you are finished, please press the <b>return</b> button below. You will come back to wherever you have been.</p></body></html>'
+        help_html = help_header + help_body.format(os.path.join(os.path.dirname(__file__), 'img/navbuttons.PNG'),
+                                                   os.path.join(os.path.dirname(__file__), 'img/homebutton.png'),
+                                                   os.path.join(os.path.dirname(__file__), 'img/backforwardbutton.png'),
+                                                   os.path.join(os.path.dirname(__file__), 'img/panzoombutton.png'),
+                                                   os.path.join(os.path.dirname(__file__), 'img/zoomboxbutton.png'))
+        self.help.insertHtml(help_html)
         self.cpTabelModel = QStandardItemModel(self)
         self.cpTable = QTableView(self)
         self.cpTable.setModel(self.cpTabelModel)
@@ -358,51 +387,21 @@ class _ControlPoint:
     def getdict(self):
 
         dict = {
-            'idp': self.idp,
-            'img1x': self.img1x,
-            'img1y': self.img1y,
-            'img2x': self.img2x,
-            'img2y': self.img2y,
+            'point_id': self.idp,
+            'img1_x': self.img1x,
+            'img1_y': self.img1y,
+            'img2_x': self.img2x,
+            'img2_y': self.img2y,
         }
 
         return dict
 
 
-def cpselect(img_path1, img_path2):
-    """
-    Tool for selection of a individual number of control points in any two pictures
-
-    :param img_path1: path to the first image
-    :param img_path2: path to the second image
-
-    :return: list with one tuple per control point (ID, x image 1, y image 1, x image 2, y image 2)
-    """
-    global img1
-    global img2
-    img1 = plt.imread(img_path1)
-    img2 = plt.imread(img_path2)
-
-    app = QApplication(sys.argv)
-    cps = _MainWindow()
-    cps.raise_()
-    app.exec_()
-
-    dictlist = []
-    for cp in cps.wp.canvas.CPlist:
-        dictlist.append(cp.getdict)
-
-    del img1, img2
-
-    return dictlist
-
-
 if __name__ == '__main__':
-    img_path1 = "DSC_0004.JPG"
-    img_path2 = "Vorlage_Passpunkte2.png"
+    img_path1 = "test/DSC_0004.JPG"
+    img_path2 = "test/Vorlage_Passpunkte2.png"
 
     cpl = cpselect(img_path1, img_path2)
 
     for cp in cpl:
         print(cp)
-
-
