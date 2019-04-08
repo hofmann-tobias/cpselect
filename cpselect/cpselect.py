@@ -395,13 +395,3 @@ class _ControlPoint:
         }
 
         return dict
-
-
-if __name__ == '__main__':
-    img_path1 = "test/DSC_0004.JPG"
-    img_path2 = "test/Vorlage_Passpunkte2.png"
-
-    cpl = cpselect(img_path1, img_path2)
-
-    for cp in cpl:
-        print(cp)
