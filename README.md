@@ -18,7 +18,7 @@ and import it with
 
 `from cpselect.cpselect import cpselect`
 
-## Using phg-cpselect
+## Using cpselect
 Just call function `cpselect`. The function takes two inputs, two strings with the path to your pictures.
 
 `controlpointlist = cpselect("path/to/image1", "path/to/image2")`
