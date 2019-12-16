@@ -1,5 +1,5 @@
 # cpselect
-Does what cpselect does in MATLAB.
+Does not exactly the same as cpselect does in MATLAB, but similiar.
 
 ## Prerequisites
 You will need to have the following packages installed:
