@@ -124,7 +124,9 @@ class _MainWindow(QMainWindow):
         self.close()
 
     def pickmodechange(self):
-
+        
+        if not hasattr(self.wp.canvas.toolbar, '_active') and hasattr(self.wp.canvas.toolbar, 'mode'):
+            setattr(self.wp.canvas.toolbar, '_active', self.wp.canvas.toolbar.mode.value)
         if self.wp.canvas.toolbar._active in ['', None]:
             if self.wp.canvas.pickmode == True:
                 self.wp.canvas.pickMode_changed = True
@@ -158,7 +160,9 @@ class _MainWindow(QMainWindow):
         self.wp.canvas.cpChanged = True
 
     def updateGUI(self):
-
+        
+        if not hasattr(self.wp.canvas.toolbar, '_active') and hasattr(self.wp.canvas.toolbar, 'mode'):
+            setattr(self.wp.canvas.toolbar, '_active', self.wp.canvas.toolbar.mode.value)
         if self.wp.canvas.toolbar._active not in ['', None]:
             self.wp.canvas.pickmode = False
             self.wp.canvas.pickMode_changed = True
