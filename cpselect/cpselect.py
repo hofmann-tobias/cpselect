@@ -1,4 +1,5 @@
 import sys, os
+import numpy as np
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -20,8 +21,8 @@ def cpselect(img_path1, img_path2):
     """
     global img1
     global img2
-    img1 = plt.imread(img_path1)
-    img2 = plt.imread(img_path2)
+    img1 = plt.imread(img_path1) if isinstance(img_path1, str) else np.array(img_path1)
+    img2 = plt.imread(img_path2) if isinstance(img_path2, str) else np.array(img_path2)
 
     app = QApplication(sys.argv)
     cps = _MainWindow()
